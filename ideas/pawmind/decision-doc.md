@@ -61,6 +61,33 @@ A privacy-first mobile app that continuously scans your dog via phone camera to 
 - ✅ Emotional resonance is deeper: this isn't utility — it's *relationship augmentation*.  
 - ⚠️ Slight deduction (−1) for anthropomorphism risk — real, but mitigatable with intentional design.
 
+---
+
+## Unit Economics (Verified 2026-03-27)
+
+**Architecture:** Hybrid (Vision on-device + Cloud Reasoning + Cloud TTS)
+
+| Component | Model | Cost (HKD) |
+|-----------|-------|------------|
+| Vision | MediaPipe + ViT (on-device) | HK$0.00 |
+| Reasoning | qwen-vl-plus | HK$0.000756 per thought |
+| TTS | cosyvoice-v3.5-flash | HK$0.004320 per thought |
+| **Total** | | **HK$0.0051 per thought** |
+
+**Per User Per Month (100 thoughts):**
+- **CosyVoice-Flash:** HK$0.51
+- **CosyVoice-Plus:** HK$0.89 (better character voices)
+
+**Business Impact:**
+- Break-even: ~50 users (tiered subscription model)
+- 18-month profit (base case): ~HK$586K
+- Margin: 97.7% (Flash) / 96.3% (Plus)
+- Even at 5% conversion (failure case): ~HK$150K profit
+
+**Conclusion:** Unit economics are exceptional. API cost risk is negligible — even 10x price increase still profitable. TTS tier choice is a product quality decision, not a cost decision.
+
+*See `projects/pawmind/planning/business-case-revised.md` for full analysis.*
+
 ## Recommendation
 **PROMOTE**  
 → This version is *more compelling*, *more ownable*, and *more aligned with your creative + technical strengths* than the original scope.

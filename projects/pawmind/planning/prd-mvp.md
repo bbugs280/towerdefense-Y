@@ -18,6 +18,9 @@
 | **Differentiator** | Cantonese support + continuous vision AI + character customization |
 | **MVP Timeline** | 8 weeks |
 | **Success Metric** | 500 beta users, 50% D7 retention, 4.0+ App Store rating |
+| **Unit Economics** | HK$0.0051/thought (Flash) or HK$0.0089/thought (Plus) |
+| **Break-Even** | ~50 users (tiered subscription) |
+| **18-Month Profit** | ~HK$586K (base case) |
 
 ---
 
@@ -47,6 +50,47 @@ Paw Mind uses Qwen-VL-Max (vision AI) + CosyVoice (TTS) to:
 2. Interpret behavior → emotion → "thought"
 3. Speak the thought aloud in a customizable character voice
 4. Get smarter over time via user feedback
+
+---
+
+## 1.5 Technical & Cost Assumptions (Verified 2026-03-27)
+
+### Architecture: Hybrid Model
+
+| Component | Location | Model | Cost |
+|-----------|----------|-------|------|
+| **Vision** | On-device | MediaPipe + ViT | HK$0.00 |
+| **Reasoning** | Cloud | qwen-vl-plus | HK$0.000756/thought |
+| **TTS** | Cloud | cosyvoice-v3.5-flash or plus | HK$0.00432-0.00810/thought |
+
+### Cost Per Thought
+
+| TTS Tier | Total Cost | Use Case |
+|----------|------------|----------|
+| **CosyVoice-Flash** | HK$0.0051 | MVP launch, standard quality |
+| **CosyVoice-Plus** | HK$0.0089 | Premium character voices, enhanced expression |
+
+### Usage Assumptions
+
+| Metric | Value |
+|--------|-------|
+| Thoughts per session | 4-6 (weighted average) |
+| Sessions per month | 18-20 (weighted average) |
+| Thoughts per month | ~100-120 per user |
+| Cost per user/month | HK$0.51 (Flash) or HK$0.89 (Plus) |
+
+### Business Impact
+
+| Metric | Value |
+|--------|-------|
+| Break-even users | ~50 (tiered subscription model) |
+| Margin | 97.7% (Flash) / 96.3% (Plus) |
+| 18-month profit (base case) | ~HK$586K (Flash) / ~HK$581K (Plus) |
+| Failure case (5% conversion) | ~HK$150K profit (still profitable) |
+
+**Recommendation:** Start with **CosyVoice-Flash** for MVP. The HK$8K profit difference over 18 months is negligible (<1.5%) — upgrade to Plus later if voice quality feedback warrants it.
+
+*Full analysis: `projects/pawmind/planning/business-case-revised.md`*
 
 ---
 
