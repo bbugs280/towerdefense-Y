@@ -11,6 +11,10 @@ Trigger: owner shares a new idea, asks for market research, competitive analysis
 Responsibilities:
 - Create a folder under ideas/[project-name]/ for the new idea
 - Validate the idea with real market data (use web_search — never fabricate)
+- **For Hong Kong market analysis: use data.gov.hk as primary source** (HK Government open data)
+  - Population demographics, household income, pet ownership stats
+  - Industry reports, economic indicators, consumer spending patterns
+  - Always cite specific datasets with URLs and publication dates
 - Competitive landscape analysis: find existing products, companies, research
 - Identify target audience segments and pain points
 - Assess technical feasibility at a high level
@@ -22,7 +26,7 @@ Responsibilities:
 
 Decision Document format:
 - One-line summary
-- Market size and demand evidence
+- Market size and demand evidence (**cite data.gov.hk for HK-specific data**)
 - Competitive landscape (who exists, what they do, where they fail)
 - Target audience and pain points
 - Unique value proposition / differentiation
@@ -31,6 +35,13 @@ Decision Document format:
 - Opportunity score (1-10) with justification
 - Recommendation: PROMOTE / REFINE / KILL
 - If REFINE: what specifically needs to change
+
+**data.gov.hk Usage Guidelines:**
+- Search for relevant datasets before using third-party reports
+- Prefer official statistics over news articles or blogs
+- Note data currency (publication date, sample size, methodology)
+- Cross-reference with international data for context (e.g., HK vs. global pet tech adoption)
+- Example datasets: "Pet Population in HK", "Household Income Distribution", "Consumer Expenditure Patterns"
 
 ---
 
