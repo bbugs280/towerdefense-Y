@@ -4,7 +4,8 @@
 **Architecture:** Hybrid (Vision on-device, Reasoning + TTS via DashScope API)  
 **Timeline:** 1 week  
 **Repo:** https://github.com/bbugs280/paw-mind  
-**POC Folder:** `poc-docs/`
+**POC Folder:** `poc-docs/`  
+**IDE:** VSCode (primary) + Xcode (build only)
 
 ---
 
@@ -17,6 +18,8 @@ Create a working iOS POC app that:
 4. Tracks latency and cost
 5. Handles offline fallback
 
+**Design Reference:** Match existing Flutter/Expo UI (90% confirmed) — see `mobile/app/index.tsx` and `mobile/constants/config.ts`
+
 ---
 
 ## 📁 Step 1: Create iOS POC Folder Structure
@@ -28,8 +31,21 @@ Create a working iOS POC app that:
 cd ~/path/to/paw-mind
 
 # Create iOS POC directory
-mkdir -p ios-poc/PawMind/Sources/App/{Views,Services,Models}
+mkdir -p ios-poc/PawMind/Sources/App/{Views,Services,Models,Config}
 mkdir -p ios-poc/poc-results
+
+# Create .env.example
+cat > ios-poc/PawMind/.env.example << EOF
+# DashScope API Key
+# Get from: https://dashscope.console.aliyun.com/
+DASHSCOPE_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# TTS Provider: cosyvoice or native
+TTS_PROVIDER=cosyvoice
+
+# Default TTS Model
+TTS_MODEL=cosyvoice-v3.5-flash
+EOF
 
 # Create .gitignore for iOS POC
 cat > ios-poc/.gitignore << EOF
@@ -62,7 +78,7 @@ git push origin main
 
 ---
 
-## 🛠️ Step 2: Create Xcode Project
+## 🛠️ Step 2: Create Xcode Project (via VSCode)
 
 ### Option A: Manual (Recommended)
 
@@ -79,8 +95,9 @@ git push origin main
    - Include Tests: unchecked
 5. **Save to:** `paw-mind/ios-poc/PawMind/`
 6. **Close Xcode**
+7. **Open VSCode** in `paw-mind/ios-poc/PawMind/`
 
-### Option B: Copilot-Assisted
+### Option B: VSCode Copilot-Assisted
 
 Open VSCode in `paw-mind/ios-poc/PawMind/` and use this prompt:
 
@@ -116,7 +133,7 @@ After creating, I'll open in Xcode to finalize project settings.
 
 ---
 
-## 🔌 Step 3: Create DashScope Service
+## 🔌 Step 3: Create DashScope Service (with .env Config)
 
 ### VSCode Copilot Prompt
 
@@ -127,9 +144,14 @@ Create DashScopeService.swift for PawMind iOS app:
 
 ## Requirements
 
+**Configuration (.env file):**
+- Load API key from .env file (DASHSCOPE_API_KEY)
+- Load TTS provider from .env (TTS_PROVIDER: cosyvoice or native)
+- Load TTS model from .env (TTS_MODEL: cosyvoice-v3.5-flash)
+- Use SwiftDotEnv or manual .env parsing
+
 **API Integration:**
 - Use URLSession for HTTP requests
-- API key from environment variable (DASHSCOPE_API_KEY)
 - Two main methods:
   1. `analyze(image: UIImage) async throws -> DogThought`
   2. `synthesize(text: String, model: String) async throws -> Data`
@@ -169,6 +191,29 @@ Create DashScopeService.swift for PawMind iOS app:
   ```
 - Return raw audio data
 
+**Voice Configuration (from Flutter/Expo reference):**
+Use COSYVOICE_CONFIG from mobile/constants/config.ts:
+
+```swift
+struct CosyVoiceConfig {
+    static let voiceChoices: [String: [String: String]] = [
+        "en": ["girl": "longpaopao_v3", "boy": "longjielidou_v3"],
+        "zh": ["girl": "longpaopao_v3", "boy": "longjielidou_v3"],
+        "yue": ["girl": "longjiayi_v3", "boy": "longanyue_v3"],
+        "ja": ["girl": "longpaopao_v3", "boy": "longjielidou_v3"]
+    ]
+    
+    static let pitchSettings: [String: [String: Double]] = [
+        "en": ["girl": 2.0, "boy": 0.0],
+        "zh": ["girl": 2.0, "boy": 0.0],
+        "yue": ["girl": 3.0, "boy": 6.0],
+        "ja": ["girl": 2.0, "boy": 0.0]
+    ]
+    
+    static let rateSettings: Double = 0.90  // All languages
+}
+```
+
 **Error Handling:**
 - Timeout: 10 seconds
 - Network errors: Retry once
@@ -185,9 +230,71 @@ Create DashScopeService.swift for PawMind iOS app:
 Save to: Services/DashScopeService.swift
 ```
 
+### .env File Setup
+
+After creating the service, create `.env` file:
+
+```bash
+cd ios-poc/PawMind
+cat > .env << EOF
+# DashScope API Key
+# Get from: https://dashscope.console.aliyun.com/
+DASHSCOPE_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# TTS Provider: cosyvoice or native
+TTS_PROVIDER=cosyvoice
+
+# Default TTS Model
+TTS_MODEL=cosyvoice-v3.5-flash
+
+# Default Language (en, zh, yue, ja)
+DEFAULT_LANGUAGE=yue
+
+# Default Gender (boy, girl)
+DEFAULT_GENDER=girl
+EOF
+```
+
 ---
 
-## 📷 Step 4: Create Camera View
+## 📷 Step 4: Create Camera View (Match Flutter UI)
+
+### UI Reference (from Flutter/Expo)
+
+**Layout Structure:**
+```
+┌─────────────────────────────┐
+│  [header: status + profile] │
+│                             │
+│       Camera preview        │
+│                             │
+│   ┌──────────────────────┐  │
+│   │  Dog thought bubble  │  │
+│   └──────────────────────┘  │
+└─────────────────────────────┘
+```
+
+**Key Components from Flutter:**
+- Full-screen camera preview (`CameraView` in Flutter)
+- Gradient overlay top (dark to transparent)
+- Dog thought bubble (centered, rounded corners)
+- Emotion badge (emoji + state)
+- Profile selector (top bar)
+- Manual snap button (optional)
+
+**State Machine from Flutter:**
+```swift
+enum SimState: String {
+    case idle = "🐾 Paw Mind"
+    case connecting = "⏳ Connecting…"
+    case ready = "🐶 Ready – snap!"
+    case streaming = "💭 Reading mind…"
+    case speaking = "🔊 Dog is speaking…"
+    case error = "⚠️ Connection lost"
+}
+```
+
+**Frame Interval:** 5000ms (5 seconds) — from `FRAME_INTERVAL_MS`
 
 ### VSCode Copilot Prompt
 
@@ -196,58 +303,75 @@ Open `ios-poc/PawMind/Sources/App/Views/` and create `CameraView.swift`:
 ```@workspace /new
 Create CameraView.swift for PawMind iOS app using SwiftUI + AVFoundation:
 
-## Requirements
+## UI Requirements (Match Flutter/Expo Design)
+
+**Layout:**
+- Full-screen camera preview (back camera)
+- Gradient overlay top (rgba(0,0,0,0.6) to transparent)
+- Dog thought bubble (centered, rounded corners, white background)
+- Emotion badge overlay (top-right corner, emoji + text)
+- Status header (top-left, shows SimState)
+- Profile selector (top bar, language/gender)
+
+**State Machine:**
+enum SimState: String {
+    case idle = "🐾 Paw Mind"
+    case connecting = "⏳ Connecting…"
+    case ready = "🐶 Ready – snap!"
+    case streaming = "💭 Reading mind…"
+    case speaking = "🔊 Dog is speaking…"
+    case error = "⚠️ Connection lost"
+}
 
 **Camera Setup:**
 - Use AVCaptureSession for camera access
 - Request camera permission in onAppear
-- Capture photo every 5 seconds
+- Capture photo every 5 seconds (FRAME_INTERVAL_MS)
 - Resolution: 480x360 (optimized for speed)
-
-**UI Components:**
-- Camera preview (full screen)
-- Emotion badge overlay (top-right corner)
-- Thought text overlay (bottom, scrollable)
-- Latency indicator (debug mode, top-left)
-- Offline indicator (when no network)
+- JPEG quality: 0.6
 
 **State Management:**
 - @Observable class CameraViewModel
 - Properties:
   - currentThought: DogThought?
-  - isProcessing: Bool
+  - simState: SimState
   - errorMessage: String?
   - latency: TimeInterval?
   - isOffline: Bool
+  - profile: DogProfile (language, gender, character)
 
 **Flow:**
 1. Camera starts on appear
 2. Every 5 seconds: capture frame → convert to UIImage
 3. Call DashScopeService.analyze(image:)
-4. Display thought + emotion
-5. Call DashScopeService.synthesize(text:)
-6. Play audio via AVAudioPlayer
-7. Track latency throughout
+4. Update simState to .streaming → .speaking
+5. Display thought bubble + emotion emoji
+6. Call DashScopeService.synthesize(text:)
+7. Play audio via AVAudioPlayer
+8. Track latency throughout
 
 **Error Handling:**
 - Permission denied: Show alert with settings link
 - Network error: Show offline indicator, use native TTS fallback
-- API error: Show toast message
+- API error: Show toast message, set simState to .error
 
 **Audio Playback:**
 - Use AVAudioPlayer for MP3 playback
 - Handle interruptions (phone calls, etc.)
+- Stop current speech when new frame captured
 
 Save to: Views/CameraView.swift
 ```
 
 ---
 
-## 📊 Step 5: Create Data Models
+## 📊 Step 5: Create Data Models (Match Flutter Structures)
 
 ### VSCode Copilot Prompt
 
-Open `ios-poc/PawMind/Sources/App/Models/` and create `DogThought.swift`:
+Open `ios-poc/PawMind/Sources/App/Models/` and create these files:
+
+### 5.1: DogThought.swift
 
 ```@workspace /new
 Create DogThought.swift model for PawMind:
@@ -288,6 +412,104 @@ struct DogThought: Codable, Identifiable {
 Save to: Models/DogThought.swift
 ```
 
+### 5.2: DogProfile.swift (Match Flutter)
+
+```@workspace /new
+Create DogProfile.swift matching Flutter/Expo structure:
+
+## Requirements
+
+**From Flutter (mobile/constants/config.ts):**
+```swift
+struct DogProfile: Codable {
+    let id: String
+    let name: String           // e.g., "🐶 My Dog"
+    let language: String       // "en", "zh", "yue", "ja"
+    let gender: String         // "boy" or "girl"
+    let character: String      // System prompt
+}
+
+// Default profile (from Flutter)
+let DEFAULT_DOG_PROFILE = DogProfile(
+    id: "default",
+    name: "🐶 My Dog",
+    language: "yue",  // Cantonese default
+    gender: "girl",
+    character: "You are a friendly, curious dog looking at a photo. Analyze what the dog in the photo is thinking or feeling. Be playful and enthusiastic in your response. Keep your response under 2 sentences."
+)
+```
+
+**Languages (from Flutter):**
+```swift
+let LANGUAGES = [
+    (label: "🇺🇸 EN", lang: "en"),
+    (label: "🇨🇳 中文", lang: "zh"),
+    (label: "🇭🇰 廣東話", lang: "yue"),
+    (label: "🇯🇵 日本語", lang: "ja")
+]
+```
+
+Save to: Models/DogProfile.swift
+```
+
+### 5.3: CosyVoiceConfig.swift (from Flutter)
+
+```@workspace /new
+Create CosyVoiceConfig.swift matching Flutter/Expo configuration:
+
+## Requirements
+
+**From Flutter (mobile/constants/config.ts COSYVOICE_CONFIG):**
+```swift
+struct CosyVoiceConfig {
+    // Voice choices by language and gender
+    static let voiceChoices: [String: [String: String]] = [
+        "en": ["girl": "longpaopao_v3", "boy": "longjielidou_v3"],
+        "zh": ["girl": "longpaopao_v3", "boy": "longjielidou_v3"],
+        "yue": ["girl": "longjiayi_v3", "boy": "longanyue_v3"],
+        "ja": ["girl": "longpaopao_v3", "boy": "longjielidou_v3"]
+    ]
+    
+    // Pitch settings (-20 to +20)
+    static let pitchSettings: [String: [String: Double]] = [
+        "en": ["girl": 2.0, "boy": 0.0],
+        "zh": ["girl": 2.0, "boy": 0.0],
+        "yue": ["girl": 3.0, "boy": 6.0],
+        "ja": ["girl": 2.0, "boy": 0.0]
+    ]
+    
+    // Rate settings (0.5 to 2.0)
+    static let rateSettings: Double = 0.90  // All languages
+    
+    // Get voice for language + gender
+    static func getVoice(language: String, gender: String) -> String {
+        return voiceChoices[language]?[gender] ?? "longpaopao_v3"
+    }
+    
+    // Get pitch for language + gender
+    static func getPitch(language: String, gender: String) -> Double {
+        return pitchSettings[language]?[gender] ?? 2.0
+    }
+}
+```
+
+**State Emoji (from Flutter STATE_EMOJI):**
+```swift
+let STATE_EMOJI: [String: String] = [
+    "happy": "😄",
+    "excited": "🤩",
+    "hungry": "🍗",
+    "sleepy": "😴",
+    "curious": "🤔",
+    "playful": "🎾",
+    "anxious": "😰",
+    "unknown": "🐾"
+]
+```
+
+Save to: Models/CosyVoiceConfig.swift
+```
+
 ---
 
 ## 🧪 Step 6: Run POC Tests
@@ -316,40 +538,76 @@ Success criteria:
 
 ### Test 2: TTS Quality
 
+**Voice Choices (from Flutter COSYVOICE_CONFIG):**
+
+Use these exact voice models:
+```swift
+let models = [
+    "cosyvoice-v3.5-flash",  // Default, recommended
+    "cosyvoice-v3.5-plus",   // Premium quality
+    "cosyvoice-v2"           // Legacy
+]
+
+// Cantonese test texts
+let texts = [
+    "波兒！波兒！掉佢啦！",  // BALL! BALL! THROW IT!
+    "我係好男孩... 係呀..."  // I'm a good boy... yes I am...
+]
+
+// Voice settings for Cantonese (from Flutter)
+// Girl: longjiayi_v3, pitch: 3.0, rate: 0.90
+// Boy: longanyue_v3, pitch: 6.0, rate: 0.90
+```
+
 **Manual Test** (no code needed):
 
-1. Generate 6 audio clips (3 models × 2 texts):
-   ```swift
-   let models = ["cosyvoice-v3.5-flash", "cosyvoice-v3.5-plus", "cosyvoice-v2"]
-   let texts = [
-       "波兒！波兒！掉佢啦！",  // BALL! BALL! THROW IT!
-       "我係好男孩... 係呀..."  // I'm a good boy... yes I am...
-   ]
-   ```
-
+1. Generate 6 audio clips (3 models × 2 texts) using voice settings above
 2. Play for 10 testers (blind test)
-
 3. Rate each (1-5):
    - Naturalness
    - Dog personality fit
    - Would you want to hear this?
-
 4. Save results to `poc-results/tts-quality.md`
 
 ### Test 3: Voice Variety
+
+**Character Presets (Match Flutter Character System):**
+
+```swift
+struct CharacterPreset {
+    let name: String
+    let prompt: String
+    let voiceModifier: String
+}
+
+let characterPresets = [
+    CharacterPreset(
+        name: "Wise Old Dog",
+        prompt: "你係一隻聰明、有經驗嘅老狗，語氣平靜、慢",
+        voiceModifier: "calm, experienced, slower pace"
+    ),
+    CharacterPreset(
+        name: "Energetic Puppy",
+        prompt: "你係一隻興奮、好玩嘅小狗，語氣高、快",
+        voiceModifier: "excited, playful, higher pitch, faster"
+    ),
+    CharacterPreset(
+        name: "Sarcastic Terrier",
+        prompt: "你係一隻諷刺、幽默嘅狗，語氣平淡、帶諷刺",
+        voiceModifier: "dry, witty, flat tone with sarcasm"
+    )
+]
+```
 
 **Copilot Prompt**:
 
 ```@workspace
 Add character voice support to DashScopeService:
 
-Create 3 character presets:
-1. Wise Old Dog: "你係一隻聰明、有經驗嘅老狗，語氣平靜、慢"
-2. Energetic Puppy: "你係一隻興奮、好玩嘅小狗，語氣高、快"
-3. Sarcastic Terrier: "你係一隻諷刺、幽默嘅狗，語氣平淡、帶諷刺"
-
-Add method:
-func synthesizeWithCharacter(text: String, character: CharacterPreset) async throws -> Data
+Use characterPresets array above. For each character:
+1. Modify system prompt with character personality
+2. Adjust pitch/rate based on character traits
+3. Generate audio with CosyVoice API
 
 Test by generating 3 clips and running blind test (n=10).
 Save results to poc-results/voice-variety.md
