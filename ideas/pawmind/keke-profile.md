@@ -15,7 +15,7 @@
 ```json
 {
   "dog_name": "Keke",
-  "chinese_name": "可可",
+  "chinese_name": "Keke",
   "age_years": 3,
   "breed": "italian_greyhound",
   "character": "dramatic",

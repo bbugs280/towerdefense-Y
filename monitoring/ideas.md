@@ -2,4 +2,6 @@
 
 | # | Idea | Date | Score | Status | Agent |
 |---|------|------|-------|--------|-------|
-| 1 | Paw Mind — AI dog mind reader app | 2026-03-22 | **8.2/10** | **🚀 Active Project** | factory |
+| 1 | Paw Mind — iOS Native + Hybrid (Vision on-device, Cloud reasoning + TTS) | 2026-03-26 | **8.4/10** | **✅ Validated (PROMOTE)** | Strategist |
+| 2 | Tinnitus Relief — Relief testing + symptom tracking + feedback loop | 2026-03-24 | **7/10** | **🟡 REFINE Recommended** | Strategist |
+| 3 | New World Value — Signal service (geopolitics + economics, Asia-grounded) | 2026-03-26 | **6.5/10** | **⏸️ Shelved** | Strategist |
