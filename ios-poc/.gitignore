@@ -1,0 +1,76 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Xcode
+# ─────────────────────────────────────────────────────────────────────────────
+.DS_Store
+*.xcworkspace
+!*.xcworkspace/contents.xcworkspacedata
+*.xcodeproj
+!*.xcodeproj/project.pbxproj
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.swiftmodule
+*.xctool
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Build
+# ─────────────────────────────────────────────────────────────────────────────
+build/
+Build/
+archives/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Secrets & Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.key
+*.p12
+*.pem
+*.crt
+*.cer
+
+# ─────────────────────────────────────────────────────────────────────────────
+# POC Results (commit these manually when ready)
+# poc-results/*.md
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CocoaPods
+Pods/
+Podfile.lock
+manifest.lock
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Swift Package Manager
+.swiftpm/
+.build/
+Packages/
+Package.pins
+Package.resolved
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Testing
+coverage/
+*.gcov
+*.gcda
+*.gcno
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Misc
+*.log
+*.tmp
+*.temp
