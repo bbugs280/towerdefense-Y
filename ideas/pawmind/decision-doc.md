@@ -96,3 +96,15 @@ A privacy-first mobile app that continuously scans your dog via phone camera to 
 None. But pre-MVP validation remains critical:  
 1. Record & label 50+ clips of dogs in known states — *with audio context* (e.g., "owner just left room → dog whines + paces")  
 2. Run 10-person concierge test with *voice mockups* — measure emotional response + willingness-to-pay for specific characters
+
+---
+
+## Updated Analysis (v4: data.gov.hk Sources)
+
+**See:** `decision-doc-v4-data-gov-hk.md` for full HK government data analysis including:
+- AFCD dog licensing statistics (85K licensed, ~250-300K actual dog owners)
+- Census and Statistics Dept demographics (age, income, household penetration)
+- HK-specific market sizing and target segments
+- Verified unit economics (HK$0.51-0.89/user/month)
+
+**Updated Opportunity Score:** 9.0/10 (validated with government data)
