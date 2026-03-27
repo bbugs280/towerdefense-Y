@@ -15,9 +15,10 @@
 | **Launch Target** | ~6 weeks after POC (early May) |
 | **Business Case** | ✅ Verified: 97.7% margin, break-even at ~50 users |
 | **Architecture** | iOS Native + Hybrid (Vision on-device, API for Reasoning + TTS) |
-| **POC Plan** | `ideas/pawmind/poc-plan-v2-ios-hybrid.md` |
-| **POC Scaffold** | `ideas/pawmind/poc-scaffold-v2-ios-hybrid.md` |
-| **Execution Guide** | `ideas/pawmind/POC-EXECUTION-GUIDE.md` (VSCode Copilot prompts) |
+| **POC Docs** | All in `projects/pawmind/` folder |
+| **POC Plan** | `projects/pawmind/poc-plan-v2-ios-hybrid.md` |
+| **POC Scaffold** | `projects/pawmind/poc-scaffold-v2-ios-hybrid.md` |
+| **Execution Guide** | `projects/pawmind/POC-EXECUTION-GUIDE.md` (VSCode Copilot prompts) |
 | **Gap Analysis** | `projects/pawmind/GAP-ANALYSIS.md` (current repo vs. target) |
 | **Planning Update** | `projects/pawmind/PLANNING-UPDATE.md` (architecture pivot docs) |
 
