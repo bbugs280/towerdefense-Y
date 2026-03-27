@@ -6,14 +6,17 @@
 | Attribute | Value |
 |-----------|-------|
 | **Current Phase** | Phase 4: DEVELOPMENT |
-| **Sub-Phase** | 4.2 Core Features |
-| **Status** | 🚀 Builder Stage Active |
+| **Sub-Phase** | 4.1 POC (iOS Native + Hybrid) |
+| **Status** | 🚀 POC Stage Active |
 | **Last Update** | 2026-03-27 |
-| **Next Milestone** | Code review + gap analysis |
+| **Next Milestone** | POC completion + Go/No-Go decision |
 | **Repo** | https://github.com/bbugs280/paw-mind |
-| **Beta Target** | ~4 weeks (mid-April) |
-| **Launch Target** | ~6 weeks (early May) |
+| **Beta Target** | ~4 weeks after POC (mid-April) |
+| **Launch Target** | ~6 weeks after POC (early May) |
 | **Business Case** | ✅ Verified: 97.7% margin, break-even at ~50 users |
+| **Architecture** | iOS Native + Hybrid (Vision on-device, API for Reasoning + TTS) |
+| **POC Plan** | `ideas/pawmind/poc-plan-v2-ios-hybrid.md` |
+| **POC Scaffold** | `ideas/pawmind/poc-scaffold-v2-ios-hybrid.md` |
 
 ---
 

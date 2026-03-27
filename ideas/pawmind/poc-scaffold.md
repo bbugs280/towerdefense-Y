@@ -1,8 +1,38 @@
-# PawMind — POC Scaffold Documentation
+# PawMind — POC Scaffold (Deprecated: Flutter On-Device)
 
-**Created:** 2026-03-24  
-**Platform:** Flutter + Platform Channels (iOS first)  
-**Goal:** Extend existing `mobile_flutter/` with on-device Pro Mode
+**Status:** ❌ DEPRECATED (2026-03-27)  
+**Replaced By:** `poc-scaffold-v2-ios-hybrid.md` (iOS Native + Hybrid)
+
+**Original Created:** 2026-03-24  
+**Original Platform:** Flutter + Platform Channels (iOS first)  
+**Original Goal:** Extend existing `mobile_flutter/` with on-device Pro Mode
+
+**Why Deprecated:**
+- Pivot from Flutter → iOS Native (faster, simpler)
+- Pivot from On-Device → Hybrid Architecture (better latency, voice quality, app size)
+- DashScope API costs verified at HK$0.0051/thought (negligible)
+
+**See:** `poc-scaffold-v2-ios-hybrid.md` for current iOS Native + Hybrid scaffold.
+
+---
+
+## Historical Context
+
+This scaffold was created for the Flutter + On-Device approach. Files created:
+- `mobile_flutter/ios/Runner/NativeML/PawMindML.swift` — MLX wrapper (no longer needed)
+- `mobile_flutter/lib/services/on_device_service.dart` — Platform channel (no longer needed)
+- `mobile_flutter/ios/Podfile` — MLX + MediaPipe pods (no longer needed)
+
+**These files are preserved** for reference but are not part of the current iOS Native + Hybrid POC.
+
+**New scaffold creates:**
+- `PawMind.xcodeproj` — iOS Native project (SwiftUI)
+- `DashScopeService.swift` — API integration (Qwen-VL-Plus + CosyVoice)
+- `CameraView.swift` — Camera + vision pipeline
+- `CostTracker.swift` — API cost tracking
+
+---
+
 
 ---
 

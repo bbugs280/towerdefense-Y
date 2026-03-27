@@ -1,17 +1,35 @@
-# PawMind — On-Device POC Plan (Flutter-First)
+# PawMind — POC Plan (Deprecated: Flutter On-Device)
 
-**Goal:** Validate on-device inference feasibility (latency, TTS quality, voice variety, battery, app size) by extending existing Flutter app.
+**Status:** ❌ DEPRECATED (2026-03-27)  
+**Replaced By:** `poc-plan-v2-ios-hybrid.md` (iOS Native + Hybrid Architecture)
 
-**Duration:** 1–2 weeks (parallel tracks)
+**Original Goal:** Validate on-device inference feasibility (latency, TTS quality, voice variety, battery, app size) by extending existing Flutter app.
 
-**Decision Rule:**
-- ✅ 4–5 tests pass → Build Pro Mode (2–3 weeks)
-- ⚠️ 2–3 tests pass → Optimize, re-test (1–2 weeks)
-- ❌ 0–1 tests pass → Stick with server-based only
+**Original Duration:** 1–2 weeks (parallel tracks)
 
-**Platform:** Flutter + Platform Channels (iOS: Swift/MLX, Android: Kotlin/TFLite)
+**Why Deprecated:**
+- Pivot from Flutter → iOS Native (faster development, better performance)
+- Pivot from On-Device → Hybrid Architecture (lower latency, smaller app, better voice quality)
+- DashScope API costs verified at HK$0.0051/thought (negligible, 97.7% margin)
 
-**Existing Codebase:** `mobile_flutter/` — extend, don't rebuild
+**See:** `poc-plan-v2-ios-hybrid.md` for current POC plan.
+
+---
+
+## Historical Context
+
+This plan was created when we assumed:
+- On-device LLM (Phi-3) was necessary for privacy/cost
+- Flutter was needed for cross-platform launch
+- API costs would be high (HK$0.06-0.12/thought estimated)
+
+**Updated Understanding (2026-03-27):**
+- Hybrid architecture (vision on-device, reasoning+TTS via API) is superior
+- iOS Native is faster to build than Flutter + platform channels
+- API costs are 91.5% lower than estimated (HK$0.0051/thought verified)
+
+**Preserved for:** Historical reference, lessons learned.
+
 
 ---
 
