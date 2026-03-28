@@ -1,5 +1,12 @@
 # 🐾 PawMind — Technical Architecture (v1.1)
 
+**File:** `architecture-v1.1.md`  
+**Version:** 1.1  
+**Previous:** `architecture-v1.md` (deprecated, renamed 2026-03-28)  
+**Next Review:** After iOS Native POC validation (target: 2026-04-05)
+
+---
+
 ## Architecture Decision: Hybrid Model (Updated 2026-03-28)
 
 **Decision:** MVP uses **Hybrid Architecture** (Vision on-device + Cloud Reasoning + Cloud TTS) for faster time-to-market and smaller app size. On-device reasoning can be added in v2.0 if needed.
