@@ -134,3 +134,33 @@ Responsibilities:
 - Always update the relevant tracking files (ideas.md, status.md) after significant actions
 - The Strategist researches, the Planner structures, the Builder creates, the Marketer sells, the Monitor tracks
 - New ideas always start with the Strategist, never skip validation
+
+### Documentation Versioning Rule
+
+**When updating any versioned document (e.g., `architecture-v1.md`, `PRD-v2.md`):**
+
+1. **Bump the version number** if content changes (not just typos):
+   - Minor updates (status, decisions, risks) → `v1.0` → `v1.1`
+   - Major restructuring → `v1.1` → `v2.0`
+
+2. **Rename the file** to match new version:
+   ```bash
+   mv doc-v1.md doc-v1.1.md
+   ```
+
+3. **Update the header** with:
+   ```markdown
+   **File:** `doc-v1.1.md`
+   **Version:** 1.1
+   **Previous:** `doc-v1.md` (deprecated, renamed YYYY-MM-DD)
+   **Next Review:** [date or milestone]
+   ```
+
+4. **Commit atomically** with clear message:
+   ```bash
+   git commit -m "Update [doc] to v1.1: [brief summary]"
+   ```
+
+**Never:** Update content without renaming, or rename without updating header metadata.
+
+---
