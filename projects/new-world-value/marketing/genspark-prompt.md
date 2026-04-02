@@ -114,11 +114,16 @@ For each of the 3 Quora question URLs provided above:
 
 After completing all tasks, provide me with:
 
-1. ✅ X post URL
-2. ✅ IG post URL (or confirmation if Story expires)
-3. ✅ 3 Quora answer URLs
-4. ⏱️ Time taken for all tasks
-5. ⚠️ Any errors or issues encountered
+1. ✅ X post URL: [URL]
+2. ✅ IG post URL: [URL or "Story expires in 24h"]
+3. ✅ 3 Quora answer URLs:
+   - Q1: [URL]
+   - Q2: [URL]
+   - Q3: [URL]
+4. ⏱️ Time taken: [X minutes]
+5. ⚠️ Any errors: [None / describe]
+
+**Save this confirmation** — Vincent will copy URLs into the channel dashboard for tracking.
 
 ---
 
