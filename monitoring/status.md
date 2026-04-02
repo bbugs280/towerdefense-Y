@@ -24,21 +24,45 @@
 
 ---
 
+### 📰 New World Value
+| Attribute | Value |
+|-----------|-------|
+| **Current Phase** | Phase 3: PRODUCTION (Content) |
+| **Sub-Phase** | 3.1 Launch (First post published) |
+| **Status** | ✅ Live on Substack |
+| **Last Update** | 2026-04-02 |
+| **Next Milestone** | Week 2 post (2026-04-09) |
+| **Publication** | https://newworldvalue.substack.com |
+| **Cadence** | Weekly (Wednesdays) |
+| **Format** | Essay + Podcast |
+| **First Post** | "The Dollar Is Already Falling: Crash 1985 or Slow Bleed?" |
+| **Content Docs** | `projects/new-world-value/content/` |
+| **About Publication** | `projects/new-world-value/about-publication.md` |
+
+---
+
 ## Promoted Projects
 (projects that passed validation and are in execution)
 
 | Project | Phase | Started | Status |
 |---------|-------|---------|--------|
 | Paw Mind | Phase 4 | 2026-03-23 | 🚀 Active |
+| New World Value | Phase 3 | 2026-04-02 | ✅ Live |
 
 ---
 
 ## Shelved / Paused
 (projects validated but deprioritized — can be revisited later)
 
-| Project | Date Shelved | Reason | Revisit Condition |
-|---------|--------------|--------|-------------------|
-| New World Value | 2026-03-26 | Focus on Paw Mind; HK/Asia Substack market small (~3-5% of platform) | Paw Mind beta launched OR demand signal from network |
+None currently.
+
+---
+
+## Recently Activated
+
+| Project | Date Activated | Trigger |
+|---------|----------------|---------|
+| New World Value | 2026-04-02 | First post + podcast published; owner committed to weekly cadence |
 
 ---
 
@@ -53,4 +77,4 @@ None yet.
 None yet.
 
 ## Last Updated
-2026-03-27 (Business case verified with real API pricing)
+2026-04-02 (NWV launched with first post + podcast; Paw Mind POC in progress)

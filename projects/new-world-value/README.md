@@ -1,31 +1,84 @@
-# New World Value — The "Enough" Framework
+# New World Value — Weekly Geopolitics + Macroeconomics Newsletter
 
-A human-led, AI-augmented signal service — mapping the emerging value system of 2026+.
+**Status:** ✅ Live (First post published 2026-04-02)  
+**Publication:** https://newworldvalue.substack.com  
+**Cadence:** Weekly (Wednesdays)  
+**Format:** Essay (2,000-3,000 words) + Podcast  
+
+---
 
 ## Mission
-To help individuals recalibrate from old metrics (GDP, home ownership, career ladder) to new values (Security, Meaning, Autonomy, Clarity, Resilience) — grounded in data, focused on the question: **"What is enough?"**
 
-## The Five Values
+New World Value is a weekly newsletter that turns the questions keeping you up at night into clear, data-driven analysis you can actually use.
 
-| Value | Old Definition | New Definition |
-|-------|----------------|----------------|
-| **Security** | Home ownership, stable job, savings | Energy resilience, learning agility, exit options |
-| **Meaning** | Career ladder, status, titles | Enough, autonomy, boundaries, non-negotiables |
-| **Autonomy** | Financial independence, early retirement | Control over time, attention, energy — right now |
-| **Clarity** | Expert opinions, news, credentials | Personal verification, signal filtering, inner compass |
-| **Resilience** | Emergency fund, insurance, backup plans | Adaptive capacity, local networks, skill redundancy |
+One question per week. Researched thoroughly. Explained plainly. Published honestly.
 
-## Core Principles
-- **Public data only**: All analysis grounded in IEA, HK Census & Statistics Dept, BCG, IMF, Reuters, and official government releases.
-- **Human-in-the-loop**: AI drafts; Vincent curates, validates, and approves.
-- **Zero personal exposure**: No name, no face, no employer reference. Fully deniable.
-- **Text-first, voice-optional**: Launches as Substack + WhatsApp + Telegram. Audio added only when scalable and compliant.
-- **Value-first framing**: Not "what happened" but "what value is shifting — and how do you recalibrate?"
+**Full publication charter:** [`about-publication.md`](./about-publication.md)
 
-## Compliance Assurance
-This project:
-- Is wholly independent of any employer
-- Uses no internal, confidential, or proprietary data
-- Makes no financial, legal, or regulatory claims
-- Is not investment advice, market commentary, or policy advocacy
-- Is published under a neutral, conceptual brand — not a personal identity
+---
+
+## What We Cover
+
+Three inseparable domains:
+
+| Domain | Focus |
+|--------|-------|
+| **Geopolitics** | Wars, alliances, power shifts — and how they affect energy, supply chains, currencies, markets |
+| **Macroeconomics** | Currencies, inflation, interest rates, debt, trade flows, central bank policy |
+| **Personal Finance** | What it all means for your savings, investments, mortgage, retirement, purchasing power |
+
+---
+
+## How We Work
+
+### The Question Engine
+Every edition starts with a single question. Examples from our first post:
+- If the U.S. dollar declines, will it crash or bleed slowly?
+- If gold is a hedge, is it too late to buy at $4,600/oz?
+- What does the Iran war mean for your groceries, gas, and flights?
+- What happens to your 401(k) if Treasury bonds stop being "safe"?
+
+### Research Process
+1. AI-powered search across hundreds of sources (central banks, investment banks, government data, academic research, quality journalism)
+2. Human verification of every fact against primary sources
+3. Analysis structured around three pillars:
+   - What is actually happening (facts)
+   - What could happen next (scenarios)
+   - What you can do about it (action framework)
+
+### Principles
+- **Follow the question, not the narrative**
+- **Show the data, name the sources**
+- **Scenarios, not predictions**
+- **Honesty over comfort**
+- **Transparency about AI tools**
+- **Independence** (no paid influence on editorial)
+
+---
+
+## Published Content
+
+| # | Title | Type | Published | Link |
+|---|-------|------|-----------|------|
+| 1 | The Dollar Is Already Falling: Crash 1985 or Slow Bleed? | Essay + Podcast | 2026-04-02 | [Substack](https://newworldvalue.substack.com/p/the-dollar-is-already-falling-crash-188) |
+
+---
+
+## Project Structure
+
+```
+projects/new-world-value/
+├── README.md                    # This file
+├── about-publication.md         # Full publication charter & principles
+├── planning/                    # Strategy, roadmap, content calendar
+├── content/
+│   ├── drafts/                  # Working drafts, research notes
+│   └── published/               # Final published versions (archived)
+└── marketing/                   # Taglines, social copy, growth tactics
+```
+
+---
+
+## Disclaimer
+
+New World Value is **not financial advice**. We do not manage money, sell products, or make specific buy-and-sell recommendations. Everything published here is educational analysis. Readers should consult a qualified financial professional before making investment decisions.
