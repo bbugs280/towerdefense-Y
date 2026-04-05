@@ -24,6 +24,41 @@
 
 ---
 
+## 🌏 Regional Pricing Consideration (Alibaba Cloud)
+
+**Alibaba Cloud DashScope regions and pricing tiers:**
+
+| Region | Endpoint | Pricing Tier | Latency from HK | Recommended For |
+|--------|----------|--------------|-----------------|-----------------|
+| **Singapore** | `ap-southeast-1` | International | ~30-50ms | ✅ **Hong Kong users (primary)** |
+| **US Virginia** | `us-east-1` | Global | ~180-220ms | US/East Coast users |
+| **Germany Frankfurt** | `eu-central-1` | Global | ~200-250ms | EU users |
+| **Beijing** | `cn-beijing` | Chinese Mainland | ~20-40ms | Mainland China only (licensing required) |
+
+**Key Implications for PawMind:**
+
+1. **Hong Kong → Singapore region** is the optimal choice:
+   - Lowest latency for HK users (~30-50ms)
+   - International pricing (no mainland China licensing requirements)
+   - No data residency concerns for HK users
+
+2. **Pricing may vary by region:**
+   - International (Singapore) rates apply to HK users
+   - Global (US/EU) rates may differ slightly
+   - Chinese Mainland (Beijing) requires ICP license — not recommended for MVP
+
+3. **Future expansion considerations:**
+   - If expanding to US: route US users to Virginia endpoint
+   - If expanding to EU: route EU users to Frankfurt endpoint
+   - If expanding to Mainland China: requires separate entity + ICP license (defer until Series A)
+
+**Action Items:**
+- [ ] Verify Singapore endpoint pricing matches documented rates (¥0.8/1M tokens in, ¥2/1M out for qwen-vl-plus)
+- [ ] Test actual latency from HK to Singapore endpoint during POC
+- [ ] Document region routing logic in architecture doc (future multi-region support)
+
+---
+
 ## CosyVoice TTS Tier Comparison
 
 | Feature | CosyVoice-Flash | CosyVoice-Plus |
